@@ -16,7 +16,8 @@ export default function Requests() {
   const [attempt, setAttempt] = useState(0);
   const page = Number(params.get('page') || 1);
   const query = params.toString();
-  useEffect(() => { setSearch(params.get('search') || ''); }, [query]);
+  const appliedSearch = params.get('search') || '';
+  useEffect(() => { setSearch(appliedSearch); }, [appliedSearch]);
   useEffect(() => {
     const controller = new AbortController();
     setResult(null); setError('');

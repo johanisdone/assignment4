@@ -34,6 +34,8 @@ Automated axe checks are helpful but are not a complete accessibility certificat
 1. Early muted text and status badges did not meet automated contrast requirements. Secondary text and badge palettes were darkened and rechecked across every captured screen.
 2. Initial dependency audit identified advisories affecting the earlier router version. React Router was upgraded to a patched 7.x release and the application was rebuilt and browser-tested.
 3. Post-logout notifications could remain visible after the next sign-in. The unnecessary logout toast was removed so session transitions and screenshots stay clear.
+4. Linux CI exposed a query-state race that could reset a draft search when an unrelated filter changed. Search synchronization now depends only on the applied search term, and the browser scenario checks that draft text survives a status-filter change.
+5. A Windows-generated dependency lockfile initially omitted Linux-native optional packages. Regenerating it without an installed dependency tree restored cross-platform package entries, and a fresh Windows install/build was verified before rerunning Linux CI.
 
 ## Pending live verification
 

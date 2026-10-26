@@ -118,7 +118,11 @@ async function main() {
   await page.getByLabel('Filter by status').selectOption('Resolved');
   await page.getByText('1–4 of 4 requests').waitFor();
   await page.getByRole('button', { name: 'Clear filters' }).click();
+  await page.getByText('1–8 of 12 requests').waitFor();
   await page.getByLabel('Search requests', { exact: true }).fill('no-such-request');
+  await page.getByLabel('Filter by status').selectOption('Open');
+  await page.getByText('1–4 of 4 requests').waitFor();
+  assert.equal(await page.getByLabel('Search requests', { exact: true }).inputValue(), 'no-such-request');
   await page.getByRole('button', { name: 'Run search' }).click();
   await page.getByRole('heading', { name: 'No requests found' }).waitFor();
   checks.push('Status filtering and no-match search produce correct result/empty states.');

@@ -520,7 +520,7 @@ The repository contains meaningful milestone commits for the brief, backend, fro
 
 
 
-API evidence timestamp: 2026-10-26T17:10:37.126Z. Browser evidence timestamp: 2026-10-26T17:11:25.628Z. The browser run completed in approximately 31 seconds on the development machine; this is test-suite duration, not an application response-time benchmark.
+API evidence timestamp: 2026-10-26T17:10:37.126Z. Browser evidence timestamp: 2026-10-26T17:27:22.383Z. The browser run completed in approximately 47 seconds on the development machine; this is test-suite duration, not an application response-time benchmark.
 
 
 

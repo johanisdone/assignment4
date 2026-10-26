@@ -1,6 +1,6 @@
 {
-  "runAt": "2026-10-26T17:11:25.628Z",
-  "durationSeconds": 31,
+  "runAt": "2026-10-26T17:27:22.383Z",
+  "durationSeconds": 47,
   "environment": "Local Chromium with production Vite build, Express, isolated MongoDB 8.2.6, synthetic users",
   "passed": 15,
   "checks": [
