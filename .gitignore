@@ -9,6 +9,3 @@ test-results/
 playwright-report/
 .DS_Store
 Thumbs.db
-docs/report/*.pdf
-docs/report/*.docx
-docs/screenshots/*.png

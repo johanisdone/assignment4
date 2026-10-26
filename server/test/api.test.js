@@ -69,6 +69,7 @@ check('Login rejects bad credentials and logout invalidates browser session', as
   await agent.post('/api/auth/logout').expect(200);
   await agent.get('/api/auth/me').expect(401);
   await agent.post('/api/auth/login').send({ email: 'student@example.test', password: 'incorrect' }).expect(401);
+  await agent.post('/api/auth/login').send({ email: 'student@example.test', password: 'x'.repeat(73) }).expect(400);
   await agent.post('/api/auth/login').send({ email: 'student@example.test', password }).expect(200);
   await agent.get('/api/auth/me').expect(200);
 });
@@ -172,4 +173,20 @@ check('Sensitive authentication endpoints are rate limited', async () => {
     if (result.status === 429) { limited = true; assert.equal(typeof result.body.message, 'string'); break; }
   }
   assert.ok(limited);
+});
+check('Production cookies are Secure and the frontend receives security headers', async () => {
+  const productionApp = createApp({ ...config, production: true, origin: 'https://campus.example.test' });
+  const result = await request(productionApp).post('/api/auth/register').send({ name: 'Production Demo', email: 'production@example.test', password }).expect(201);
+  assert.match(result.headers['set-cookie'][0], /; Secure/);
+  assert.ok(result.headers['content-security-policy']);
+  assert.ok(result.headers['strict-transport-security']);
+  assert.equal(result.headers['x-powered-by'], undefined);
+});
+check('Activity growth is bounded with a recoverable conflict response', async () => {
+  const { agent } = await student();
+  const item = await created(agent);
+  await ServiceRequest.updateOne({ _id: item._id }, { $set: { activity: Array.from({ length: 200 }, () => ({ actor: 'Synthetic Demo', type: 'comment', message: 'Existing activity', at: new Date() })) } });
+  const result = await agent.post(`/api/requests/${item._id}/comments`).send({ message: 'One more update' }).expect(409);
+  assert.match(result.body.message, /activity limit/);
+  assert.equal((await ServiceRequest.findById(item._id)).activity.length, 200);
 });
