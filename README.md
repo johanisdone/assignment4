@@ -21,6 +21,8 @@ Later: email notifications, file attachments, staff assignment, password reset, 
 
 Architecture, acceptance criteria, wireframes, data model, and API contract: [Project brief](docs/PROJECT_BRIEF.md). Test evidence: [Testing](docs/TESTING.md). Deployment: [Deployment guide](docs/DEPLOYMENT.md).
 
+![CampusDesk student dashboard](docs/screenshots/04-student-dashboard.png)
+
 ## Stack and structure
 
 React + Vite + React Router; Node.js + Express; MongoDB Atlas + Mongoose; bcrypt password hashing; JWT session cookies; custom responsive CSS and Lucide icons.
@@ -62,9 +64,22 @@ To serve the production build locally, set production-ready server variables, ru
 
 - Repository: https://github.com/johanisdone/assignment4
 - Hosted application: **pending authenticated hosting setup and production Atlas configuration**.
-- Report: generated into `docs/report/` as PDF, DOCX, and Markdown.
-- Screenshots: generated into `docs/screenshots/` by the browser verification script.
+- [Internship report PDF](docs/report/CampusDesk_Internship_Report_Johan_Eljo.pdf)
+- [Editable report DOCX](docs/report/CampusDesk_Internship_Report_Johan_Eljo.docx)
+- [Report Markdown](docs/report/CampusDesk_Internship_Report_Johan_Eljo.md)
+- [Screenshot gallery](docs/SCREENSHOTS.md): 13 major desktop/mobile views.
+- Verified locally: 16 API scenarios and 15 browser scenarios passed; zero axe findings on the 13 captured screens for selected rules. See timestamped evidence files.
+- Repository public visibility confirmed using the unauthenticated GitHub API on 26 October 2026.
 - Live-site core-flow verification: pending deployment.
+
+To regenerate the report after updating deployment details in `docs/submission.json`:
+
+```sh
+python -m pip install -r scripts/requirements-report.txt
+npm run report
+```
+
+The generator requires existing API/browser evidence and screenshots. The report follows the supplied ICTAK Summer Internship Report outline and includes the actual architecture, API, test findings, and client views.
 
 ## Limitations and privacy
 
